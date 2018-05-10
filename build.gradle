@@ -1,0 +1,45 @@
+group 'MigrationsExposed'
+version '1.0'
+
+buildscript {
+    ext.kotlin_version = '1.2.31'
+
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://dl.bintray.com/kotlin/exposed" }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'application'
+apply plugin: "com.github.johnrengelman.shadow"
+
+repositories {
+    mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+    maven { url "https://dl.bintray.com/kotlin/exposed" }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile 'org.jetbrains.exposed:exposed:0.9.1'
+    compile 'org.postgresql:postgresql:42.2.1'
+    compile 'com.zaxxer:HikariCP:2.7.7'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'org.jetbrains.kotlin:kotlin-reflect:1.2.41'
+    compile 'org.reflections:reflections:0.9.11'
+}
+
+mainClassName = 'app.AppKt'
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
